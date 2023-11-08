@@ -1,5 +1,5 @@
 import { of, EMPTY } from 'rxjs';
-import { concatMap, withLatestFrom, tap, catchError, finalize } from 'rxjs/operators';
+import { withLatestFrom, concatMap, tap, catchError, finalize } from 'rxjs/operators';
 
 /**
  * `concatLatestFrom` combines the source value
