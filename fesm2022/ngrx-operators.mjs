@@ -11,7 +11,7 @@ import { concatMap, withLatestFrom, tap, catchError, finalize } from 'rxjs/opera
  * Select the active customer from the NgRx Store
  *
  * ```ts
- * import { concatLatestFrom } from '@ngrx/effects';
+ * import { concatLatestFrom } from '@ngrx/operators';
  * import * as fromCustomers from '../customers';
  *
  * this.actions$.pipe(
@@ -22,7 +22,7 @@ import { concatMap, withLatestFrom, tap, catchError, finalize } from 'rxjs/opera
  * Select a customer from the NgRx Store by its id that is available on the action
  *
  * ```ts
- * import { concatLatestFrom } from '@ngrx/effects';
+ * import { concatLatestFrom } from '@ngrx/operators';
  * import * fromCustomers from '../customers';
  *
  * this.actions$.pipe(
