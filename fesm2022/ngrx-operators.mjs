@@ -9,9 +9,16 @@ function concatLatestFrom(observablesFactory) {
   });
 }
 
+// src/map-response.mjs
+import { of as of2 } from "rxjs";
+import { catchError, map } from "rxjs/operators";
+function mapResponse(observer) {
+  return (source$) => source$.pipe(map((value) => observer.next(value)), catchError((error) => of2(observer.error(error))));
+}
+
 // src/tap-response.mjs
 import { EMPTY } from "rxjs";
-import { catchError, finalize, tap } from "rxjs/operators";
+import { catchError as catchError2, finalize, tap } from "rxjs/operators";
 function tapResponse(observerOrNext, error, complete) {
   const observer = typeof observerOrNext === "function" ? {
     next: observerOrNext,
@@ -19,13 +26,14 @@ function tapResponse(observerOrNext, error, complete) {
     error,
     complete
   } : observerOrNext;
-  return (source) => source.pipe(tap({ next: observer.next, complete: observer.complete }), catchError((error2) => {
+  return (source) => source.pipe(tap({ next: observer.next, complete: observer.complete }), catchError2((error2) => {
     observer.error(error2);
     return EMPTY;
   }), observer.finalize ? finalize(observer.finalize) : (source$) => source$);
 }
 export {
   concatLatestFrom,
+  mapResponse,
   tapResponse
 };
 //# sourceMappingURL=ngrx-operators.mjs.map
